@@ -2,6 +2,7 @@ import java.rmi.RemoteException;
 // import java.rmi.registry.LocateRegistry;
 // import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Client extends UnicastRemoteObject implements ClientIF, Runnable{ //since we execute instance of this class with mul threads
@@ -15,8 +16,7 @@ public class Client extends UnicastRemoteObject implements ClientIF, Runnable{ /
     }
     
     public synchronized void retriveMessage(String message) throws RuntimeException{
-        System.out.println("----------------------------WELCOME TO eEXAM----------------------------\n\n");
-        System.out.println("Studnet Name :" + this.name);
+        System.out.println("Studnet Name : " + this.name);
         int qNum =1;
         System.out.println("Note: Say 1 if it's true or 0 if it's false");
         for(String question: message.split("@")){
@@ -28,12 +28,30 @@ public class Client extends UnicastRemoteObject implements ClientIF, Runnable{ /
         System.out.println(message);
     }
     public void run(){
-        input = new Scanner(System.in);
-        System.out.println("=================Answer Sheet=================n");
-        int answers [] = new int[5], numQuestions =1, ans;
+        Scanner input = new Scanner(System.in);
+        System.out.println("=================Answer Sheet=================\n");
+        int answers [] = new int[5], numQuestions =1,ans=2;
         while(numQuestions <=5){
+
+            boolean inputValid = false;
+            while (!inputValid) {
+            // String val = input.next();
+            // ans = 0;
+
+            try {
             System.out.print(numQuestions+" :");
-            ans = input.nextInt();
+                ans = input.nextInt();
+                inputValid = true;
+                // break;
+            }
+            catch(InputMismatchException msg){
+                System.out.println(" \n Input Mismatch Exception has occured " +msg);
+                // msg.printStackTrace();
+                inputValid = false;
+            }
+            }
+            // // ans = a;
+            // System.out.println("You've entered: "+ans);
             while(ans != 0 & ans !=1){
                 System.err.println("Please Enter 1 for True and 0 for False!");
                 ans = input.nextInt();
@@ -49,8 +67,12 @@ public class Client extends UnicastRemoteObject implements ClientIF, Runnable{ /
             // for(Thread thread : )
             //     thread.join(); getback to here
             System.out.println("\n\nYou can Disscuss with your classmate in the chatboot!\n\n");
+           
+
             while(true){
+                
                 String disscutionMsg = input.nextLine();
+                if(!disscutionMsg.isEmpty())
                 server.broadcastDisscussion(name+" : "+disscutionMsg);
             }
 
