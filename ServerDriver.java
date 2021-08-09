@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 
 public class ServerDriver {
     public static void main(String[] args) throws RemoteException, MalformedURLException {
+
         rebind("RMIServer", new Server());
     }    
 }

@@ -6,8 +6,8 @@ import java.util.ArrayList;
 public class Server extends UnicastRemoteObject implements ServerIF {
     private static final long serialVersionUID =1L;
     private ArrayList<ClientIF> clients;
-    private String questions = "Anteneh is a little boy@Issack is like a dog@Kira is very short guy@D.r Asrat is really amazing teacher in the univers@YOLO: You live only once";
-    private int[] answers ={1, 0, 1, 0, 1}; 
+    private String questions = "Anteneh is a little boy@Anteneh is a dog@Kira is very tiny guy@D.r Asrat is really amazing teacher in the universe@YOLO: You live only once";
+    private int[] answers ={1, 1, 1, 0, 1}; 
     protected Server() throws RemoteException{
         clients = new ArrayList<ClientIF>();
     }
