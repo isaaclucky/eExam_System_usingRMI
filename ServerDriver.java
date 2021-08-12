@@ -8,5 +8,5 @@ public class ServerDriver {
 
         rebind("RMIServer", new Server());
         System.out.println("\n Server Started!! ");
-    }    
+    }
 }
