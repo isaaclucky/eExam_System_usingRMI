@@ -42,11 +42,13 @@ public class Client extends UnicastRemoteObject implements ClientIF, Runnable{ /
             System.out.print(numQuestions+" :");
                 ans = input.nextInt();
                 inputValid = true;
+                break;
                 // break;
             }
             catch(InputMismatchException msg){
-                System.out.println(" \n Input Mismatch Exception has occured " +msg);
+                System.out.println(" \n Please Enter 1 for True and 0 for False " );
                 // msg.printStackTrace();
+                input.next();
                 inputValid = false;
             }
             }

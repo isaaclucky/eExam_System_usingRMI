@@ -14,10 +14,22 @@ public class ClientDriver {
         firstName = sc.nextLine();
         System.out.print("Last Name: ");
         lastName = sc.nextLine();
+        String val="none";
 
-        String serverURL = "rmi://localhost/RMIServer";
-        ServerIF server = (ServerIF) Naming.lookup(serverURL);
-        new Thread(new Client(firstName+' ' + lastName, server)).start();
+
+       while(!val.isEmpty()){
+        try {
+            String serverURL = "rmi://localhost/RMIServer";
+            ServerIF server = (ServerIF) Naming.lookup(serverURL);
+            new Thread(new Client(firstName+' ' + lastName, server)).start();
+            val = "";
+        } catch (Exception e) {
+            System.err.println("\n\n\n *****    Error Server is not Started !!    ***** \n");
+            System.out.print("[ To reconnect type: \"Connect\"  ] \n:");
+            val = sc.nextLine();
+
+        }
+    }
 
     }
 }

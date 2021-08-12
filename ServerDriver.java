@@ -7,5 +7,6 @@ public class ServerDriver {
     public static void main(String[] args) throws RemoteException, MalformedURLException {
 
         rebind("RMIServer", new Server());
+        System.out.println("\n Server Started!! ");
     }    
 }
