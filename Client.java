@@ -1,6 +1,4 @@
 import java.rmi.RemoteException;
-// import java.rmi.registry.LocateRegistry;
-// import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -86,27 +84,4 @@ public class Client extends UnicastRemoteObject implements ClientIF, Runnable { 
             e.printStackTrace();
         }
     }
-    // static Scanner input = new Scanner(System.in);
-    // public Client(){}
-    // public static void main(String[] args) {
-    // try {
-    // // Getting the registry
-    // Registry registry = LocateRegistry.getRegistry(null);
-
-    // // Looking up the registry for the remote object
-    // ExamInterface stub = (ExamInterface) registry.lookup("Hello");
-
-    // // Calling the remote method using the obtained object
-    // System.out.print("\n==========================WELCOME TO
-    // eEXAM==========================n");
-    // System.out.print("Enter Firstname :");
-    // stub.setStudentFname(input.nextLine());
-    // System.out.print("Enter Lastname :");
-    // stub.setStudentLname(input.nextLine());
-    // // System.out.println("Remote method invoked");
-    // } catch (Exception e) {
-    // System.err.println("Client exception: " + e.toString());
-    // e.printStackTrace();
-    // }
-    // }
 }
