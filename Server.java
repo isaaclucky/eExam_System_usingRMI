@@ -8,10 +8,12 @@ import java.util.ArrayList;
 public class Server extends UnicastRemoteObject implements ServerIF {
     private static final long serialVersionUID = 1L;
     private ArrayList<ClientIF> clients;
-    private String questions = "Anteneh is a little boy@Anteneh is a dog@Kira is very tiny guy@D.r Asrat is really amazing teacher in the universe@YOLO: You live only once";
-    private int[] answers = { 1, 1, 1, 1, 1 };
+    private String []questions;
+    private int[] answers;
 
-    protected Server() throws RemoteException {
+    protected Server(String questions[], int answers[]) throws RemoteException {
+        this.questions = questions;
+        this.answers = answers;
         clients = new ArrayList<ClientIF>();
     }
 
@@ -20,7 +22,7 @@ public class Server extends UnicastRemoteObject implements ServerIF {
         this.broadcastMessage(questions, clientIntf);
     }
 
-    public synchronized void broadcastMessage(String message, ClientIF client) throws RemoteException {
+    public synchronized void broadcastMessage(String [] message, ClientIF client) throws RemoteException {
         client.retriveMessage(message);
     }
 
@@ -38,10 +40,10 @@ public class Server extends UnicastRemoteObject implements ServerIF {
             if (answers[i] == answer[i])
                 ++total;
         }
-        if (total >= 3)
-            response = "Congratulations, You got " + total + " out of 5";
+        if (total >= (int)(answer.length * 0.75))
+            response = "Congratulations, You got " + total + " out of "+answer.length;
         else
-            response = "You got " + total + " out of 5";
+            response = "You got " + total + " out of "+ answer.length;
         return response;
     }
 

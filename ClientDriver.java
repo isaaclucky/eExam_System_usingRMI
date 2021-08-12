@@ -5,12 +5,13 @@ import java.rmi.RemoteException;
 import java.util.Scanner;
 
 public class ClientDriver {
+    static Scanner sc;
     public static void main(String[] args) throws MalformedURLException, RemoteException, NotBoundException {
         String firstName = null, lastName = null;
         System.out.println("---------------------------- WELCOME TO eEXAM ----------------------------\n\n");
 
         System.out.print("First Name: ");
-        Scanner sc = new Scanner(System.in);
+        sc = new Scanner(System.in);
         firstName = sc.nextLine();
         System.out.print("Last Name: ");
         lastName = sc.nextLine();

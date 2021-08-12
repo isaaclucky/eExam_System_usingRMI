@@ -10,6 +10,7 @@ public class Client extends UnicastRemoteObject implements ClientIF, Runnable { 
     private ServerIF server;
     private String name = null;
     static Scanner input;
+    static int lengthOfQuestions;
 
     protected Client(String name, ServerIF server) throws RemoteException {
         this.name = name;
@@ -17,14 +18,15 @@ public class Client extends UnicastRemoteObject implements ClientIF, Runnable { 
         server.registerClient(this);
     }
 
-    public synchronized void retriveMessage(String message) throws RuntimeException {
+    public synchronized void retriveMessage(String message[]) throws RuntimeException {
         System.out.println("Studnet Name : " + this.name);
         int qNum = 1;
         System.out.println("Note: Say 1 if it's true or 0 if it's false");
-        for (String question : message.split("@")) {
-            System.out.println(qNum + ", " + question);
+        for (int i=0; i < message.length; i++) {
+            System.out.println(qNum + ", " + message[i]);
             ++qNum;
         }
+        Client.lengthOfQuestions = message.length;
     }
 
     public synchronized void retriveDisscution(String message) throws RemoteException {
@@ -32,10 +34,10 @@ public class Client extends UnicastRemoteObject implements ClientIF, Runnable { 
     }
 
     public void run() {
-        Scanner input = new Scanner(System.in);
+        input = new Scanner(System.in);
         System.out.println("=================Answer Sheet=================\n");
-        int answers[] = new int[5], numQuestions = 1, ans = 2;
-        while (numQuestions <= 5) {
+        int answers[]= new int[Client.lengthOfQuestions], numQuestions = 1, ans = 2;
+        while (numQuestions <= Client.lengthOfQuestions) {
 
             boolean inputValid = false;
             while (!inputValid) {
